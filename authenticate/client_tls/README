@@ -1,0 +1,5 @@
+Use TLS on the client-side to verify a self-signed server certificate.
+
+Run the create-self-signed-cert.sh once if you haven't yet (this will
+create ./.crossbar/server.{key,crt}).
+
