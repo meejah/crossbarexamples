@@ -47,7 +47,8 @@
                   "port": 8083,
                   "tls": {
                       "certificate": "server.crt",
-                      "key": "server.key"
+                      "key": "server.key",
+                      "dhparam": "dhparam"
                   }
                },
                "paths": {
@@ -102,8 +103,11 @@
                            "port": 8083,
                            "tls": {
                                "hostname": "localhost",
+                               "certificate": "client.crt",
+                               "key": "client.key",
                                "ca_certificates": [
-                                   "server.crt"
+                                   "intermediate.cert.pem",
+                                   "ca.cert.pem"
                                ]
                            }
                        },

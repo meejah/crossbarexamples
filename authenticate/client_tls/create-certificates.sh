@@ -136,3 +136,20 @@ cp ./ca/intermediate/certs/server_0.cert.pem .crossbar/server.crt
 
 cp ./ca/intermediate/private/client_0.key.pem .crossbar/client.key
 cp ./ca/intermediate/certs/client_0.cert.pem .crossbar/client.crt
+
+echo "Deploying intermediate and root CA certs"
+
+cp ./ca/certs/ca.cert.pem .crossbar/ca.cert.pem
+cp ./ca/intermediate/certs/intermediate.cert.pem .crossbar/intermediate.cert.pem
+
+echo "removing passphrases from keys"
+
+pushd ./.crossbar
+openssl rsa -passin pass:xyzzy -in server.key -out server.new.key
+mv server.new.key server.key
+
+openssl rsa -passin pass:xyzzy -in client.key -out client.new.key
+mv client.new.key client.key
+
+echo "creating dhparam file"
+openssl dhparam -outform PEM -out ./.crossbar/dhparam 2048
